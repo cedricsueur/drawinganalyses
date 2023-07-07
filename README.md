@@ -1,1 +1,5 @@
-First commit
+# Installation 
+
+```
+pip install -r requirements.txt -e .
+```

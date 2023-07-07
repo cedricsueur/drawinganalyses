@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "drawinganalyses"
+version = "0.0.1"
+authors = [
+  { name="Elliot Maître", email="elliot.maitre@irit.fr" },
+]
+description = "A small package to do drawing analyses"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/cedricsueur/drawinganalyses"
