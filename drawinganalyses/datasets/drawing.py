@@ -11,11 +11,11 @@ class Drawing():
         self.data_dir = data_dir
         self.drawing_name = drawing_name
         self.dict_label = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        self.to_str_label = {0: 'Autumn', 1: 'Spring', 2: 'Summer', 3: 'Winter'}
+        self.label_to_str = {0: 'Autumn', 1: 'Spring', 2: 'Summer', 3: 'Winter'}
         self.label = self.dict_label[label]
         
         basewidth = 300
-        img = Image.open("{data_dir}/{drawing_name}".format(data_dir=self.data_dir, label=self.to_str_label[self.label], drawing_name=self.drawing_name))
+        img = Image.open("{data_dir}/{drawing_name}".format(data_dir=self.data_dir, label=self.label_to_str[self.label], drawing_name=self.drawing_name))
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
         img = img.resize((basewidth,hsize), Image.Resampling.LANCZOS)
@@ -23,12 +23,12 @@ class Drawing():
         self.image = img
         
     def __str__(self):
-        return ("Drawing name : {}, label : {}".format(self.drawing_name, self.to_str_label[self.label]))
+        return ("Drawing name : {}, label : {}".format(self.drawing_name, self.label_to_str[self.label]))
         
     def __getitem__(self):
-        print("Drawing name : {}, test label : {}".format(self.drawing_name, self.to_str_label[self.label]))
+        print("Drawing name : {}, test label : {}".format(self.drawing_name, self.label_to_str[self.label]))
         return(self.image)
 
     def __repr__(self):
         display(self.image)
-        return("Drawing name : {}, label : {}".format(self.drawing_name, self.to_str_label[self.label]))
+        return("Drawing name : {}, label : {}".format(self.drawing_name, self.label_to_str[self.label]))

@@ -7,14 +7,19 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 
 
 def main():
-    annotation_file = "labels.csv" 
+    annotations_file = "labels.csv" 
     models_storage = LOCAL_DATA_DIR / "models"
-    draws = DrawingModule(data_dir=LOCAL_DATA_DIR, annotation_file=annotation_file)
+    dataset_name = 'Molly'
+    label_to_str = {0: 'Autumn', 1: 'Spring', 2: 'Summer', 3: 'Winter'}
+    
+    draws = DrawingModule(
+        dataset_name=dataset_name,
+        data_dir=LOCAL_DATA_DIR,
+        annotations_file=annotations_file,
+        label_to_str=label_to_str)
 
     model = TransferLearningModel()
-    # Créez un objet ModelCheckpoint
-    checkpoint_callback = ModelCheckpoint(dirpath=models_storage, filename='modele-{epoch:02d}-{val_loss:.2f}')
-
+    
     # Créez votre trainer avec le callback
     trainer = Trainer(max_epochs=20, default_root_dir=models_storage)
     trainer.fit(model=model, datamodule=draws)

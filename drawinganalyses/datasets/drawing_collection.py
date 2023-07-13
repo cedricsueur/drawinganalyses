@@ -44,7 +44,7 @@ class DrawingCollectionSplit():
         return list_labels
     
     def get_label_to_class_name(self):
-        return self.drawings[0].to_str_label
+        return self.drawings[0].label_to_str
 
 
 import os
@@ -86,4 +86,4 @@ class DrawingCollection():
         return list_labels
     
     def get_label_to_class_name(self):
-        return self.drawings[0].to_str_label
+        return self.drawings[0].label_to_str
