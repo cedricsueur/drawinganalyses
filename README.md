@@ -10,7 +10,7 @@ Add MADE_LOCAL_DATA environment variable pointing to where your data are stored 
 export MADE_LOCAL_DATA = /path/to/data_folder
 ```
 
-Expected older organization:
+Expected folder organization:
 
 ```
 Data_folder
@@ -35,3 +35,9 @@ labels.csv
 ├── img3,4
 ├── img4,0
 ```
+
+# Configuration
+
+## Training 
+
+An example of training is provided in `drawinganalyses/scripts/molly_training.py`. Please adapt the main to your dataset name.
