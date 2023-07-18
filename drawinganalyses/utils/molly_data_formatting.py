@@ -14,4 +14,5 @@ for drawing in drawing_filenames:
             list_tuple_annotations.append((drawing, labels[label]))
             
 df = pd.DataFrame(list_tuple_annotations)
+df.columns = ['name', 'label']
 df.to_csv(data_dir / 'labels.csv', index=False)

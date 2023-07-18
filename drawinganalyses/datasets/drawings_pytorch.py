@@ -18,6 +18,7 @@ class DrawingDataset(Dataset):
         label_to_str:str,
         transform=None,
         target_transform=None):
+        
         self.img_dir = data_dir / dataset_name
         self.img_labels = pd.read_csv(self.img_dir / annotations_file)
         self.transform = transform
@@ -42,13 +43,15 @@ class DrawingDataset(Dataset):
 
     def show(self, idx):
         basewidth = 300
-        img = Image.open("{data_dir}/{drawing_name}".format(data_dir=self.img_dir, drawing_name=self.img_labels.iloc[idx, 0]))
+        print(self.img_labels)
+        drawing_name = self.img_labels.at[idx, 'name']
+        label = self.label_to_str[self.img_labels.at[idx, 'label']]
+        img = Image.open("{data_dir}/{drawing_name}".format(data_dir=self.img_dir, drawing_name=drawing_name))
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
         img = img.resize((basewidth,hsize), Image.Resampling.LANCZOS)
-
         display(img)
-        return("Drawing name : {}, label : {}".format(self.img_labels.iloc[idx, 0], self.label_to_str[self.img_labels.iloc[idx, 1]]))
+        return("Drawing name : {drawing_name}, label : {label}".format(drawing_name=drawing_name, label=label))
 
 
 class DrawingModule(pl.LightningDataModule):

@@ -46,8 +46,8 @@ class TransferLearningModel(pl.LightningModule):
         self.lr_scheduler_gamma = lr_scheduler_gamma
         self.num_workers = num_workers
         self.__build_model()
-        self.train_acc = Accuracy(task='multiclass', num_classes=4)
-        self.valid_acc = Accuracy(task='multiclass', num_classes=4)
+        self.train_acc = Accuracy(task='multiclass', num_classes=3)
+        self.valid_acc = Accuracy(task='multiclass', num_classes=3)
         self.save_hyperparameters()
         
     def __build_model(self):
@@ -74,7 +74,7 @@ class TransferLearningModel(pl.LightningModule):
         
     
     def loss(self, logits, labels):
-            return self.loss_func(input=logits, target=labels)
+        return self.loss_func(input=logits, target=labels)
         
     def training_step(self, batch, batch_idx):
         # 1. Forward pass:
