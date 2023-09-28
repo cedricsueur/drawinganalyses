@@ -53,6 +53,10 @@ class DrawingDataset(Dataset):
         display(img)
         return("Drawing name : {drawing_name}, label : {label}".format(drawing_name=drawing_name, label=label))
 
+    def get_image(self, idx):
+        img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
+        image = Image.open(img_path).convert("RGB")
+        return image
 
 class DrawingModule(pl.LightningDataModule):
     def __init__(
