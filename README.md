@@ -41,3 +41,8 @@ labels.csv
 ## Training 
 
 An example of training is provided in `drawinganalyses/scripts/molly_training.py`. Please adapt the main to your dataset name.
+
+
+# Notebooks
+
+Different notebooks are provided which shows how to use the different datastructures, train classification models and apply explainability techniques to these models
