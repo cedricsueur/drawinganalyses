@@ -1,5 +1,4 @@
 import os
-import glob 
 
 from drawinganalyses.datasets.drawing import Drawing
 from tqdm import tqdm
@@ -47,12 +46,6 @@ class DrawingCollectionSplit():
         return self.drawings[0].label_to_str
 
 
-import os
-import glob 
-
-from drawinganalyses.datasets.drawing import Drawing
-from tqdm import tqdm
-
 class DrawingCollection():
     drawings: list[Drawing]
     def __init__(self, data_dir):
@@ -71,7 +64,7 @@ class DrawingCollection():
         
         
     def __getitem__(self, index):
-        return self.drawings[index]
+        return self.drawings[index].image, self.drawings[index].label
 
     def get_images(self):
         list_images = []
