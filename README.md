@@ -39,6 +39,8 @@ labels.csv
 ├── img4,0
 ```
 
+Different scripts are provided to obtain this formatting.
+
 # Configuration
 
 Most of the configuration happens in the `config.py` file. Multiple examples are provided there, for the three datasets we used. The formatting of the folder should follow the guidelines provided above. Please uncomment the configuration you want to use and comment all the other ones.
@@ -63,7 +65,7 @@ python ./drawing_analyses/scripts/run_training.py
 
 ## Notebooks
 
-The principal notebook is `Interpretability`. In this notebook, we illustrate how we can use `Captum` to have an understanding of the results of our trained networks. This notebook can be applied to any of the datasets metionned above. Just make sure to configure `config.py` accordingly. To apply the algorithms illustrated in this notebook to you whole dataset, please refer to the next section.
+The principal notebook is `Interpretability`. In this notebook, we illustrate how we can use [Captum](https://captum.ai/) to have an understanding of the results of our trained networks. This notebook can be applied to any of the datasets metionned above. Just make sure to configure `config.py` accordingly. To apply the algorithms illustrated in this notebook to you whole dataset, please refer to the next section.
 
 Other notebooks are provided to illustrate some of the concept used in this repo:
 - `examples_artists` contains a short example to explore the datasets,
@@ -73,10 +75,10 @@ Other notebooks are provided to illustrate some of the concept used in this repo
 
 ## Interpretability scripts
 
-To apply the algorithms to a whole dataset, just run :
+To apply the `Captum` algorithms to a whole dataset, just run :
 
 ```
 python ./drawing_analyses/scripts/run_interpretability.py
 ```
 
-This may take a while (~5 to 7 hours). The analyzed images are stored in the folder according to the configuration.
+This may take a while (~5 to 7 hours on `CPU`). The analyzed images are stored in the folder according to the configuration.
