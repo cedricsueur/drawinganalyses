@@ -7,16 +7,21 @@ from captum.attr import NoiseTunnel
 from captum.attr import visualization as viz
 import matplotlib.pyplot as plt
 import numpy as np
+from tqdm import tqdm
 
 from drawinganalyses.config import LOCAL_DATA_DIR
 
 
-def explinability_images(dataloader, model, label_to_str, class_names, count_season):
+def interpretability(dataloader, model, label_to_str, class_names, count_season):
+    """
+    To use inside a notebook to apply an interpretability to multiple images
+    
+    Warning : the image are not stored anywhere
+    """
     total_count = 0
     
     for inputs, labels in iter(dataloader):
         
-
         keep = True
         true_label = label_to_str[labels.item()]
         output = model(inputs)
@@ -79,19 +84,19 @@ def explinability_images(dataloader, model, label_to_str, class_names, count_sea
                                                     titles=["Original", "Positive Attribution", "Masked"],
                                                     fig_size=(18, 6)
                                                 )
-            
-                if total_count == 20:
-                    break
-                
             except(AssertionError):
                 continue
         
 
 
-def explinability_images_save(dataloader, model, label_to_str, class_names):
+def interpretability_save(dataloader, model, label_to_str, class_names):
+    """
+    To use inside a script in order to store the interpreted images on disk
+    """
+    
     total_count = 0
     
-    for inputs, labels in iter(dataloader):
+    for inputs, labels in tqdm(iter(dataloader)):
         
         true_label = label_to_str[labels.item()]
         output = model(inputs)
@@ -165,7 +170,7 @@ def explinability_images_save(dataloader, model, label_to_str, class_names):
             ax3.set_title('True label : {true_label}, Predicted label : {predicted_label}'.format(true_label=true_label, predicted_label=predicted_label))
 
             # Show or save the merged figure
-            fig3.savefig(LOCAL_DATA_DIR / "MollyExplicability" / "{total_count}.png".format(total_count=total_count))
+            fig3.savefig(LOCAL_DATA_DIR / "HumansExplicability" / "{total_count}.png".format(total_count=total_count))
             total_count += 1
             print('saved figure ', total_count)
                      
@@ -174,4 +179,47 @@ def explinability_images_save(dataloader, model, label_to_str, class_names):
             continue
         
 
+def imshow(inp, title=None):
+    """
+    Display image for Tensor.
+    """
+    inp = inp.numpy().transpose((1, 2, 0))
+    mean = np.array([0.485, 0.456, 0.406])
+    std = np.array([0.229, 0.224, 0.225])
+    inp = std * inp + mean
+    inp = np.clip(inp, 0, 1)
+    plt.imshow(inp)
+    if title is not None:
+        plt.title(title)
+    plt.pause(0.001)  # pause a bit so that plots are updated
+    
+    
+def visualize_model(model, device, dataloaders, class_names, label_to_str, num_images=6):
+    """
+    Display some images analyzed by a model
+    """
+    was_training = model.training
+    model.eval()
+    images_so_far = 0
+    fig = plt.figure()
 
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(dataloaders['val']):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+
+            outputs = model(inputs)
+            _, preds = torch.max(outputs, 1)
+
+            for j in range(inputs.size()[0]):
+                label = label_to_str[labels[j].item()]
+                images_so_far += 1
+                ax = plt.subplot(num_images//2, 2, images_so_far)
+                ax.axis('off')
+                ax.set_title(f'predicted: {class_names[preds[j]]}, real label : {label}')
+                imshow(inputs.cpu().data[j])
+
+                if images_so_far == num_images:
+                    model.train(mode=was_training)
+                    return
+        model.train(mode=was_training)
