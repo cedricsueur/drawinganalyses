@@ -52,7 +52,7 @@ Most of the configuration happens in the `config.py` file. Multiple examples are
 Three formatting scripts are provided in the `utils` folder, one for each of the dataset we used `ArtistAnimals`, `Molly` and `Human drawings`. These scripts are designed to take as inputs the datasets as they were provided, and format them correctly according to the guidelines above. An example of usage is :
 
 ```
-python ./drawing_analyses/utils/molly_data_formmating.py
+python ./drawinganalyses/utils/molly_data_formmating.py
 ```
 
 ## Training 
@@ -60,7 +60,7 @@ python ./drawing_analyses/utils/molly_data_formmating.py
 Once the data are formatted, you can train your model. Make sure that you use the correct version of `config.py`, depending on which dataset you want to train on. Once this is done, you can run the following command :
 
 ```
-python ./drawing_analyses/scripts/run_training.py
+python ./drawinganalyses/scripts/run_training.py
 ```
 
 ## Notebooks
@@ -78,7 +78,7 @@ Other notebooks are provided to illustrate some of the concept used in this repo
 To apply the `Captum` algorithms to a whole dataset, just run :
 
 ```
-python ./drawing_analyses/scripts/run_interpretability.py
+python ./drawinganalyses/scripts/run_interpretability.py
 ```
 
 This may take a while (~5 to 7 hours on `CPU`). The analyzed images are stored in the folder according to the configuration.
