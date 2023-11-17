@@ -9,8 +9,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
 
-from drawinganalyses.config import LOCAL_DATA_DIR
-
+from drawinganalyses.config import (
+    LOCAL_DATA_DIR,
+    DATASET_NAME,
+    MODELS_STORAGE,
+    ANNOTATION_FILE,
+    MODEL_NAME,
+    INTERPRETABILITY_STORAGE,
+    label_to_str
+)
 
 def interpretability(dataloader, model, label_to_str, class_names, count_season):
     """
@@ -89,7 +96,7 @@ def interpretability(dataloader, model, label_to_str, class_names, count_season)
         
 
 
-def interpretability_save(dataloader, model, label_to_str, class_names):
+def interpretability_save(dataloader, model, label_to_str, class_names, split):
     """
     To use inside a script in order to store the interpreted images on disk
     """
@@ -170,7 +177,7 @@ def interpretability_save(dataloader, model, label_to_str, class_names):
             ax3.set_title('True label : {true_label}, Predicted label : {predicted_label}'.format(true_label=true_label, predicted_label=predicted_label))
 
             # Show or save the merged figure
-            fig3.savefig(LOCAL_DATA_DIR / "HumansExplicability" / "{total_count}.png".format(total_count=total_count))
+            fig3.savefig(LOCAL_DATA_DIR / INTERPRETABILITY_STORAGE / f"{split}_{total_count}.png")
             total_count += 1
             print('saved figure ', total_count)
                      

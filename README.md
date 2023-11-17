@@ -22,11 +22,11 @@ Data_folder
 │   ├── img2.jpg
 │   ├── img3.jpg
 │   └── labels.csv
-└── Humans
-    ├── img1.jpg
-    ├── img2.jpg
-    ├── img3.jpg
-    └── labels.csv
+├── Humans
+│   ├── img1.jpg
+│   ├── img2.jpg
+│   ├── img3.jpg
+│   └── labels.csv
 ```
 
 Expected data format for labels.csv:
@@ -69,7 +69,7 @@ The principal notebook is `Interpretability`. In this notebook, we illustrate ho
 
 Other notebooks are provided to illustrate some of the concept used in this repo:
 - `examples_artists` contains a short example to explore the datasets,
-- `full_example_artists` contains all the different steps presented above, so you can play with,
+- `full_example_artists` contains all the different steps presented above, so you can play with it. A bit outdated however,
 - `Test_pyfeats` is an ongoing work to train and analyze the results obtained using [Pyfeats](https://github.com/giakou4/pyfeats) to extract features, train a random forest and  get features importance,
 - `analysis_explainability` is an ongoing work on trying to find interesting statics about the channels of the images.
 
