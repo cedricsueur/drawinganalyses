@@ -103,7 +103,7 @@ def interpretability_save(dataloader, model, label_to_str, class_names, split):
     
     total_count = 0
     
-    for inputs, labels in tqdm(iter(dataloader)):
+    for inputs, labels, _ in tqdm(iter(dataloader)):
         
         true_label = label_to_str[labels.item()]
         output = model(inputs)
