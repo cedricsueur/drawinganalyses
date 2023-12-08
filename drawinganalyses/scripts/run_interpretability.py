@@ -61,12 +61,12 @@ def main():
     model.load_state_dict(torch.load(MODELS_STORAGE / MODEL_NAME))
     model.eval()
     
-    #trainloader = torch.utils.data.DataLoader(trainset, batch_size=1, shuffle=True, num_workers=2)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=1, shuffle=True, num_workers=2)
     valloader = torch.utils.data.DataLoader(valset, batch_size=1, shuffle=True, num_workers=2)
     testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=2)
 
-    #print("Applying to the Training set")
-    #interpretability_save(trainloader, model, label_to_str, class_names, "train")
+    print("Applying to the Training set")
+    interpretability_save(trainloader, model, label_to_str, class_names, "train")
     print("Applying to the Validation set")
     interpretability_save(valloader, model, label_to_str, class_names, "valid")
     print("Applying to the Test set")

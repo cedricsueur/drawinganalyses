@@ -32,11 +32,12 @@ class DrawingDataset(Dataset):
         img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
         image = Image.open(img_path).convert("RGB")
         label = self.img_labels.iloc[idx, 1]
+        name = self.img_labels.iloc[idx, 0]
         if self.transform:
             image = self.transform(image)
         if self.target_transform:
             label = self.target_transform(label)
-        return image, label
+        return image, label, name
 
     def __str__(self):
         return ("Drawing name : {}, label : {}".format(self.drawing_name, self.label_to_str[self.label]))
@@ -57,6 +58,10 @@ class DrawingDataset(Dataset):
         img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx, 0])
         image = Image.open(img_path).convert("RGB")
         return image
+    
+    def get_name(self, idx):
+        return self.img_labels.at[idx, 0]
+
 
 class DrawingModule(pl.LightningDataModule):
     def __init__(
