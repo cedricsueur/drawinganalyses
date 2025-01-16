@@ -7,10 +7,10 @@ conda env create --file environment.yml
 pip install -e .
 ```
 
-Add MADE_LOCAL_DATA environment variable pointing to where your data are stored :
+Add MADE_DATA_DIR environment variable pointing to where your data are stored :
 
 ```
-export MADE_LOCAL_DATA = /path/to/data_folder
+export MADE_DATA_DIR=/path/to/data_folder
 ```
 
 Expected folder organization:
